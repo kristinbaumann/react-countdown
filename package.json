@@ -1,7 +1,8 @@
 {
-  "name": "countdownTimer",
+  "name": "react-countdown",
   "version": "0.0.1",
-  "private": true,
+  "description": "React Countdown till Christmas",
+  "repository": "https://github.com/kristinbaumann/react-countdown",
   "devDependencies": {
     "react-scripts": "0.8.4"
   },
