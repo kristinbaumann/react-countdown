@@ -6,6 +6,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Live: [http://countdown2christmas.kristin-baumann.com/](http://countdown2christmas.kristin-baumann.com/)
 
+<img src="/countdown.gif" width="600">
+
 # Scripts
 
 ### `npm start`
