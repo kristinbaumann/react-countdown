@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Countdown from './Countdown.js';
 import logo from './logo.svg';
+import github from './github.png';
 
 class App extends Component {
   render() {
@@ -11,6 +12,11 @@ class App extends Component {
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>React Countdown</h2>
+
+          <a href="https://github.com/kristinbaumann/react-countdown" target="_blank">
+            <img src={github} alt="github" className="githubIcon" />
+            <span>View on Github</span>
+          </a>
         </div>
 
         <h3 className="title">Christmas Eve is coming soon (Midnight of 23rd to 24th Dec, UTC time):</h3>
