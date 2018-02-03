@@ -35,8 +35,7 @@ class Countdown extends Component {
       days: 0,
       hours: 0,
       min: 0,
-      sec: 0,
-      millisec: 0,
+      sec: 0
     };
 
     // calculate time difference between now and expected date
