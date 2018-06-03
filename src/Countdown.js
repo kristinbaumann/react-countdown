@@ -17,6 +17,7 @@ class Countdown extends Component {
       hours: 0,
       min: 0,
       sec: 0,
+      isSet: false,
     }
   }
 
@@ -24,7 +25,7 @@ class Countdown extends Component {
     // update every second
     this.interval = setInterval(() => {
       const date = this.calculateCountdown(this.props.date);
-      date ? this.setState(date) : this.stop();
+      date ? this.setState({ ...date, isSet: true }) : this.stop();
     }, 1000);
   }
 
@@ -82,35 +83,65 @@ class Countdown extends Component {
 
   render() {
     const countDown = this.state;
-
+    let $isDay = this.addLeadingZeros(countDown.days);
+    let $isHours = this.addLeadingZeros(countDown.hours);
+    let $isMin = this.addLeadingZeros(countDown.min);
+    let $isSec = this.addLeadingZeros(countDown.sec);
+    console.log('date', this.props.date);
+    console.log('isSet', this.state.isSet);
+    if (
+      $isDay === '00' &&
+      $isHours === '00' &&
+      $isMin === '00' &&
+      $isSec <= '00') {
+      if (!this.state.isSet) {
+        $isDay = <div>--:</div>;
+        $isHours = <div>--:</div>;
+        $isMin = <div>--:</div>;
+        $isSec = <div>--</div>;
+      } else {
+        $isDay = <div className="none" />;
+        $isHours = <div className="timeout">timeout</div>;
+        $isMin = <div className="none" />;
+        $isSec = <div className="none" />;
+      }
+    } else {
+      if (
+        $isDay === '00' &&
+        $isHours === '00' &&
+        $isMin === '00' &&
+        $isSec <= '01'
+      ) {
+        $isDay = <div className="None"/>;
+        $isHours = <div className="timeout">Timeout</div>;
+        $isMin = <div className="None" />;
+        $isSec = <div className="None" />;
+      }
+    }
     return (
       <div className="Countdown">
         <span className="Countdown-col">
           <span className="Countdown-col-element">
-              <strong>{this.addLeadingZeros(countDown.days)}</strong>
-              <span>{countDown.days === 1 ? 'Day' : 'Days'}</span>
+            {$isDay}
           </span>
         </span>
 
         <span className="Countdown-col">
           <span className="Countdown-col-element">
-            <strong>{this.addLeadingZeros(countDown.hours)}</strong>
-            <span>Hours</span>
+          {$isHours}
           </span>
         </span>
 
 
         <span className="Countdown-col">
           <span className="Countdown-col-element">
-            <strong>{this.addLeadingZeros(countDown.min)}</strong>
-            <span>Min</span>
+          {$isMin}
           </span>
         </span>
 
         <span className="Countdown-col">
           <span className="Countdown-col-element">
-            <strong>{this.addLeadingZeros(countDown.sec)}</strong>
-            <span>Sec</span>
+          {$isSec}
           </span>
         </span>
       </div>
