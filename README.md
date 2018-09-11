@@ -17,3 +17,7 @@ Runs the app in the development mode. Open [http://localhost:3000](http://localh
 ### `npm run build`
 
 Builds the app for production to the `build` folder.<br>
+
+## License
+
+See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
