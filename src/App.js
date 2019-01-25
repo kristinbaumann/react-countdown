@@ -20,7 +20,10 @@ class App extends Component {
         </div>
 
         <h3 className="title">Christmas Eve is coming soon (Midnight of 23rd to 24th Dec, UTC time):</h3>
-        <Countdown date={`${year}-12-24T00:00:00`} />
+        <Countdown date={new Date(`${year}-12-24T00:00:00`)} />
+
+        <h3 className="title">Countdown for 2 hours and 13 seconds, but showing just minutes and seconds:</h3>
+        <Countdown hours={2} seconds={13} timeComponentsToShow={['minutes', 'seconds']} />
       </div>
     );
   }
