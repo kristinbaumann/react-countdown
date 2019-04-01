@@ -16,8 +16,10 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>React Flip Countdown</h2>
 
-          {/* <a href="https://github.com/kristinbaumann/react-countdown" target="_blank"> */}
-          <a href="https://github.com/rradik/react-countdown" target="_blank">
+          <a
+            href="https://github.com/kristinbaumann/react-countdown"
+            target="_blank"
+          >
             <img src={github} alt="github" className="githubIcon" />
             <span>View on Github</span>
           </a>
@@ -26,7 +28,11 @@ class App extends Component {
         <h3 className="title">
           Christmas Eve is coming soon (Midnight of 23rd to 24th Dec, UTC time):
         </h3>
-        <Countdown date={`${year}-12-24T00:00:00`} />
+        <Countdown
+          date={`${year}-12-24T00:00:00`}
+          useFlipView={true}
+          expiryMsg={"Merry Christmas !!"}
+        />
       </div>
     );
   }

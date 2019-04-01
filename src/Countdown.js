@@ -23,15 +23,22 @@ class Countdown extends Component {
       hoursShuffle: true,
       minutesShuffle: true,
       secondsShuffle: true,
+
       isExpired: false
     };
+
+    this.addLeadingZeros = this.addLeadingZeros.bind(this);
   }
 
   componentDidMount() {
     // update every second
     this.interval = setInterval(() => {
       const date = this.calculateCountdown(this.props.date);
-      date ? this.updateFlippers(date) : this.expired();
+      date
+        ? this.props.useFlipView
+          ? this.updateFlippers(date)
+          : this.setState(date)
+        : this.expired();
     }, 1000);
   }
 
@@ -116,8 +123,6 @@ class Countdown extends Component {
     }
     timeLeft.sec = diff;
 
-    // this.updateFlippers(timeLeft);
-
     return timeLeft;
   }
 
@@ -140,56 +145,115 @@ class Countdown extends Component {
 
   render() {
     const countDown = this.state;
-
     const {
+      isExpired,
       daysShuffle,
       hoursShuffle,
       minutesShuffle,
-      secondsShuffle,
-      isExpired
+      secondsShuffle
     } = this.state;
 
     return (
       <div className="Countdown">
         {isExpired ? (
-          <h1 style={{ color: "orange" }}>Hackathon Day !!</h1>
+          <ExpiryView expiryMsg={this.props.expiryMsg} />
+        ) : this.props.useFlipView ? (
+          <FlipView
+            countDown={countDown}
+            shuffle={{
+              days: daysShuffle,
+              hours: hoursShuffle,
+              min: minutesShuffle,
+              sec: secondsShuffle
+            }}
+            addLeadingZeros={this.addLeadingZeros}
+          />
         ) : (
-          <div>
-            <div className={"flipClock"}>
-              <FlipUnitContainer
-                unit={countDown.days === 1 ? "Day" : "Days"}
-                digit={this.addLeadingZeros(countDown.days)}
-                currentDigit={this.addLeadingZeros(countDown.days)}
-                previousDigit={this.addLeadingZeros(countDown.days + 1)}
-                shuffle={daysShuffle}
-              />
-              <FlipUnitContainer
-                unit={"Hours"}
-                digit={this.addLeadingZeros(countDown.hours)}
-                currentDigit={this.addLeadingZeros(countDown.hours)}
-                previousDigit={this.addLeadingZeros(countDown.hours + 1)}
-                shuffle={hoursShuffle}
-              />
-              <FlipUnitContainer
-                unit={"Min"}
-                digit={this.addLeadingZeros(countDown.min)}
-                currentDigit={this.addLeadingZeros(countDown.min)}
-                previousDigit={this.addLeadingZeros(countDown.min + 1)}
-                shuffle={minutesShuffle}
-              />
-              <FlipUnitContainer
-                unit={"Sec"}
-                digit={this.addLeadingZeros(countDown.sec)}
-                currentDigit={this.addLeadingZeros(countDown.sec)}
-                previousDigit={this.addLeadingZeros(countDown.sec + 1)}
-                shuffle={secondsShuffle}
-              />
-            </div>
-          </div>
+          <DefaultPlainView
+            countDown={countDown}
+            addLeadingZeros={this.addLeadingZeros}
+          />
         )}
       </div>
     );
   }
+}
+
+function ExpiryView(props) {
+  return <h1 style={{ color: "orange" }}>{props.expiryMsg}</h1>;
+}
+
+function DefaultPlainView(props) {
+  const { countDown, addLeadingZeros } = props;
+
+  return (
+    <div>
+      <span className="Countdown-col">
+        <span className="Countdown-col-element">
+          <strong>{addLeadingZeros(countDown.days)}</strong>
+          <span>{countDown.days === 1 ? "Day" : "Days"}</span>
+        </span>
+      </span>
+
+      <span className="Countdown-col">
+        <span className="Countdown-col-element">
+          <strong>{addLeadingZeros(countDown.hours)}</strong>
+          <span>Hours</span>
+        </span>
+      </span>
+
+      <span className="Countdown-col">
+        <span className="Countdown-col-element">
+          <strong>{addLeadingZeros(countDown.min)}</strong>
+          <span>Min</span>
+        </span>
+      </span>
+
+      <span className="Countdown-col">
+        <span className="Countdown-col-element">
+          <strong>{addLeadingZeros(countDown.sec)}</strong>
+          <span>Sec</span>
+        </span>
+      </span>
+    </div>
+  );
+}
+
+function FlipView(props) {
+  const { countDown, addLeadingZeros, shuffle } = props;
+
+  return (
+    <div className={"flipClock"}>
+      <FlipUnitContainer
+        unit={countDown.days === 1 ? "Day" : "Days"}
+        digit={addLeadingZeros(countDown.days)}
+        currentDigit={addLeadingZeros(countDown.days)}
+        previousDigit={addLeadingZeros(countDown.days + 1)}
+        shuffle={shuffle.days}
+      />
+      <FlipUnitContainer
+        unit={"Hours"}
+        digit={addLeadingZeros(countDown.hours)}
+        currentDigit={addLeadingZeros(countDown.hours)}
+        previousDigit={addLeadingZeros(countDown.hours + 1)}
+        shuffle={shuffle.hours}
+      />
+      <FlipUnitContainer
+        unit={"Min"}
+        digit={addLeadingZeros(countDown.min)}
+        currentDigit={addLeadingZeros(countDown.min)}
+        previousDigit={addLeadingZeros(countDown.min + 1)}
+        shuffle={shuffle.min}
+      />
+      <FlipUnitContainer
+        unit={"Sec"}
+        digit={addLeadingZeros(countDown.sec)}
+        currentDigit={addLeadingZeros(countDown.sec)}
+        previousDigit={addLeadingZeros(countDown.sec + 1)}
+        shuffle={shuffle.sec}
+      />
+    </div>
+  );
 }
 
 Countdown.propTypes = {
