@@ -1,0 +1,192 @@
+@import url("https://fonts.googleapis.com/css?family=Droid+Sans+Mono");
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+header {
+  display: flex;
+  position: relative;
+}
+header h1 {
+  font-family: "Droid Sans Mono", monospace;
+  font-weight: lighter;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: white;
+}
+
+.flipClock {
+  display: flex;
+  justify-content: space-between;
+  width: 500px;
+}
+
+.flipUnitContainer {
+  display: block;
+  position: relative;
+  width: 140px;
+  height: 120px;
+  -webkit-perspective-origin: 50% 50%;
+  perspective-origin: 50% 50%;
+  -webkit-perspective: 300px;
+  perspective: 300px;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0px 10px 10px -10px grey;
+}
+
+.upperCard,
+.lowerCard {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+  border: 1px solid whitesmoke;
+}
+.upperCard span,
+.lowerCard span {
+  font-size: 5em;
+  font-family: "Droid Sans Mono", monospace;
+  font-weight: lighter;
+  color: #333333;
+}
+
+.upperCard {
+  align-items: flex-end;
+  border-bottom: 0.5px solid whitesmoke;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+.upperCard span {
+  -webkit-transform: translateY(50%);
+  transform: translateY(50%);
+}
+
+.lowerCard {
+  align-items: flex-start;
+  border-top: 0.5px solid whitesmoke;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+.lowerCard span {
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.flipCard {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.flipCard span {
+  font-family: "Droid Sans Mono", monospace;
+  font-size: 5em;
+  font-weight: lighter;
+  color: #333333;
+}
+.flipCard.unfold {
+  top: 50%;
+  align-items: flex-start;
+  -webkit-transform-origin: 50% 0%;
+  transform-origin: 50% 0%;
+  -webkit-transform: rotateX(180deg);
+  transform: rotateX(180deg);
+  background-color: white;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border: 0.5px solid whitesmoke;
+  border-top: 0.5px solid whitesmoke;
+}
+.flipCard.unfold span {
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.flipCard.fold {
+  top: 0%;
+  align-items: flex-end;
+  -webkit-transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
+  -webkit-transform: rotateX(0deg);
+  transform: rotateX(0deg);
+  background-color: white;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border: 0.5px solid whitesmoke;
+  border-bottom: 0.5px solid whitesmoke;
+}
+.flipCard.fold span {
+  -webkit-transform: translateY(50%);
+  transform: translateY(50%);
+}
+
+.fold {
+  -webkit-animation: fold 0.6s cubic-bezier(0.455, 0.03, 0.515, 0.955) 0s 1
+    normal forwards;
+  animation: fold 0.6s cubic-bezier(0.455, 0.03, 0.515, 0.955) 0s 1 normal
+    forwards;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.unfold {
+  -webkit-animation: unfold 0.6s cubic-bezier(0.455, 0.03, 0.515, 0.955) 0s 1
+    normal forwards;
+  animation: unfold 0.6s cubic-bezier(0.455, 0.03, 0.515, 0.955) 0s 1 normal
+    forwards;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+@-webkit-keyframes fold {
+  0% {
+    -webkit-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+  }
+  100% {
+    -webkit-transform: rotateX(-180deg);
+    transform: rotateX(-180deg);
+  }
+}
+
+@keyframes fold {
+  0% {
+    -webkit-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+  }
+  100% {
+    -webkit-transform: rotateX(-180deg);
+    transform: rotateX(-180deg);
+  }
+}
+@-webkit-keyframes unfold {
+  0% {
+    -webkit-transform: rotateX(180deg);
+    transform: rotateX(180deg);
+  }
+  100% {
+    -webkit-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+  }
+}
+@keyframes unfold {
+  0% {
+    -webkit-transform: rotateX(180deg);
+    transform: rotateX(180deg);
+  }
+  100% {
+    -webkit-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+  }
+}
