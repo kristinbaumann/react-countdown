@@ -1,19 +1,32 @@
 {
   "name": "react-countdown",
-  "version": "0.0.1",
-  "description": "React Countdown till Christmas",
+  "version": "1.0.0",
+  "description": "React Countdown Component",
+  "author": "Kristin Baumann (https://www.kristin-baumann.com)",
   "repository": "https://github.com/kristinbaumann/react-countdown",
   "devDependencies": {
-    "react-scripts": "0.8.4"
+    "react-scripts": "5.0.0"
   },
   "dependencies": {
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0"
+    "react": "17.0.0",
+    "react-dom": "17.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
